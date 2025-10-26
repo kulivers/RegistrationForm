@@ -9,6 +9,8 @@ export const Step3Security: React.FC<StepProps> = ({
   onPrevious,
   isLoading,
   error,
+  onShowTerms,
+  onShowPrivacy,
 }) => {
   const [localData, setLocalData] = React.useState({
     password: formData.password,
@@ -166,13 +168,21 @@ export const Step3Security: React.FC<StepProps> = ({
           />
           <label htmlFor="acceptTerms" className="text-sm text-slate-700">
             I agree to the{' '}
-            <a href="#" className="text-blue-600 hover:text-blue-700 font-medium">
+            <button 
+              type="button"
+              onClick={() => onShowTerms?.()}
+              className="text-blue-600 hover:text-blue-700 font-medium underline"
+            >
               Terms of Service
-            </a>{' '}
+            </button>{' '}
             and{' '}
-            <a href="#" className="text-blue-600 hover:text-blue-700 font-medium">
+            <button 
+              type="button"
+              onClick={() => onShowPrivacy?.()}
+              className="text-blue-600 hover:text-blue-700 font-medium underline"
+            >
               Privacy Policy
-            </a>
+            </button>
           </label>
         </div>
         {errors.acceptTerms && (

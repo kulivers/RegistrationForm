@@ -89,8 +89,8 @@ export const Step6Complete: React.FC<StepProps> = ({
         </div>
       </div>
 
-      {/* Support */}
-      <div className="text-center">
+      {/* Support - Hidden per requirements */}
+      {/* <div className="text-center">
         <p className="text-sm text-slate-600 mb-4">
           Need help getting started? Our support team is here to assist you.
         </p>
@@ -114,7 +114,7 @@ export const Step6Complete: React.FC<StepProps> = ({
             📚 Help Center
           </a>
         </div>
-      </div>
+      </div> */}
 
       <div className="flex gap-4">
         <Button

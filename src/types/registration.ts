@@ -63,6 +63,8 @@ export interface StepProps {
   onComplete: () => void;
   isLoading: boolean;
   error: string | null;
+  onShowTerms?: () => void;
+  onShowPrivacy?: () => void;
 }
 
 // Типы для валидации

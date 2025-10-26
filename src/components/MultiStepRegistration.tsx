@@ -16,6 +16,8 @@ import {
 import { PROGRESS_STEPS } from '../constants/form';
 import {Step6Complete} from "./steps/Step6Complete";
 import {Step5Complete} from "./steps/Step5Complete";
+import { TermsOfService } from './TermsOfService';
+import { PrivacyPolicy } from './PrivacyPolicy';
 
 interface MultiStepRegistrationProps {
   illustrationImage: string;
@@ -32,6 +34,9 @@ export const MultiStepRegistration: React.FC<MultiStepRegistrationProps> = ({
   const { currentStep, formData, isLoading, error, isCompleted } = useAppSelector(
     (state) => state.registration
   );
+
+  const [showTerms, setShowTerms] = React.useState(false);
+  const [showPrivacy, setShowPrivacy] = React.useState(false);
 
   const handleNext = (data: any) => {
     dispatch(submitStep({ step: currentStep, data }));
@@ -71,6 +76,8 @@ export const MultiStepRegistration: React.FC<MultiStepRegistrationProps> = ({
       onComplete: handleComplete,
       isLoading,
       error,
+      onShowTerms: () => setShowTerms(true),
+      onShowPrivacy: () => setShowPrivacy(true),
     };
 
     switch (currentStep) {
@@ -143,18 +150,42 @@ export const MultiStepRegistration: React.FC<MultiStepRegistrationProps> = ({
             <div className="mt-8 text-center">
               <p className="text-xs text-slate-500">
                 By continuing, you agree to our{' '}
-                <a href="#" className="text-blue-600 hover:text-blue-700 font-medium">
+                <button 
+                  onClick={() => setShowTerms(true)}
+                  className="text-blue-600 hover:text-blue-700 font-medium"
+                >
                   Terms of Service
-                </a>{' '}
+                </button>{' '}
                 and{' '}
-                <a href="#" className="text-blue-600 hover:text-blue-700 font-medium">
+                <button 
+                  onClick={() => setShowPrivacy(true)}
+                  className="text-blue-600 hover:text-blue-700 font-medium"
+                >
                   Privacy Policy
-                </a>
+                </button>
               </p>
             </div>
           </div>
         </div>
       </div>
+
+      {/* Terms Modal */}
+      {showTerms && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4">
+          <div className="bg-white rounded-2xl max-w-4xl max-h-[90vh] overflow-y-auto">
+            <TermsOfService onBack={() => setShowTerms(false)} />
+          </div>
+        </div>
+      )}
+
+      {/* Privacy Modal */}
+      {showPrivacy && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4">
+          <div className="bg-white rounded-2xl max-w-4xl max-h-[90vh] overflow-y-auto">
+            <PrivacyPolicy onBack={() => setShowPrivacy(false)} />
+          </div>
+        </div>
+      )}
     </div>
   );
 };
